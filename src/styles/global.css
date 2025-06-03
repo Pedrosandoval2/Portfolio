@@ -106,32 +106,7 @@ body {
 
     .glow-box {
         box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
-    }
 
-    .glow-bar {
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    }
-
-    .glow-badge {
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    }
-
-    /* Hover effects for interactive elements */
-    .group:hover .group-hover\:scale-105 {
-        transform: scale(1.05);
-    }
-
-    .group:hover .group-hover\:bg-white\/20 {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Animation delays for staggered effects */
-    .animate-fade-up:nth-child(1) {
-        animation-delay: 0.1s;
-    }
-
-    .animate-fade-up:nth-child(2) {
-        animation-delay: 0.2s;
     }
 
     .animate-fade-up:nth-child(3) {
