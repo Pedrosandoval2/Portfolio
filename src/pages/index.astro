@@ -22,8 +22,32 @@ const projects = [
 			"Google Auth",
 			"React Router",
 		],
+		href: "https://app.highrisetechlabs.com/auth/login",
 	},
+	{
+		id: 2,
+		title: "Event creation system",
+		description:
+			"Aplicación web para la gestión de eventos y creación de entradas.",
+		image: "/assets/proyecto2.webp",
+		tags: [
+			"Nestjs",
+			"Docker",
+			"Mysql",
+			"JWT",
+			"TypeORM",
+			"React",
+			"Yup",
+			"Zustand",
+			"React Router",
+			"Typescript",
+			"Axios",
+			"React Hook Form",
+		],
+		href: "https://github.com/Pedrosandoval2/Event-Registration-System",
+	}
 ];
+
 ---
 
 <Layout>
@@ -269,7 +293,7 @@ const projects = [
 											project.image
 										}
 										alt={project.title}
-										class="w-full  object-cover rounded-t-2xl "
+										class="w-full object-fit rounded-t-2xl h-[200px]"
 									/>
 								</div>
 
@@ -291,7 +315,7 @@ const projects = [
 
 									<div class="flex gap-3 text-center">
 										<a
-											href="https://app.highrisetechlabs.com/auth/login"
+											href={project.href}
 											target="_blank"
 											class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors"
 										>
