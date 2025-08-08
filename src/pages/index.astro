@@ -26,7 +26,7 @@ const projects = [
 	},
 	{
 		id: 2,
-		title: "Event creation system",
+		title: "Event Creation System",
 		description:
 			"Aplicación web para la gestión de eventos y creación de entradas.",
 		image: "/assets/proyecto2.webp",
@@ -44,10 +44,30 @@ const projects = [
 			"Axios",
 			"React Hook Form",
 		],
+		href: "https://github.com/Pedrosandoval2/Event-Creation-System",
+	},
+	{
+		id: 3,
+		title: "User Registration & QR Code",
+		description:
+			"Aplicación web para registrar asistentes a eventos, generar códigos QR individuales y escanearlos para validar la asistencia en tiempo real.",
+		image: "/assets/proyecto3.webp",
+		tags: [
+			"NestJS",
+			"TypeScript",
+			"TypeORM",
+			"MySQL",
+			"Docker Compose",
+			"QR Code",
+			"Class Validator",
+			"Next.js",
+			"TailwindCSS",
+			"html5-qrcode",
+			"Axios",
+		],
 		href: "https://github.com/Pedrosandoval2/Event-Registration-System",
-	}
+	},
 ];
-
 ---
 
 <Layout>
@@ -289,9 +309,7 @@ const projects = [
 							<div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
 								<div>
 									<img
-										src={
-											project.image
-										}
+										src={project.image}
 										alt={project.title}
 										class="w-full object-fit rounded-t-2xl h-[200px]"
 									/>
