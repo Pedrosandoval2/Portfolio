@@ -1,0 +1,118 @@
+---
+import LayoutGridCard from "./LayoutGridCard.astro";
+
+export interface Card {
+    id: number;
+    content: string;
+    title: string;
+    description: string;
+    className: string;
+    tags: string[];
+    href: string;
+    thumbnail: string;
+}
+
+const cards: Card[] = [
+    {
+        id: 2,
+        title: "High Rise Tech Labs",
+        content: "High Rise Tech Labs",
+        description:
+            "Aplicación web para registrar asistentes a eventos, generar códigos QR individuales y escanearlos para validar la asistencia en tiempo real.",
+        className: "sm:col-span-1 col-span-2",
+        tags: [
+            "Nestjs",
+            "Docker",
+            "Mysql",
+            "JWT",
+            "TypeORM",
+            "React",
+            "Yup",
+            "Zustand",
+            "React Router",
+            "Typescript",
+            "Axios",
+            "React Hook Form",
+        ],
+        thumbnail: "/assets/proyecto1.webp",
+        href: "https://app.highrisetechlabs.com/auth/login",
+    },
+    {
+        id: 1,
+        title: "Event Creation System",
+        content: "Event Creation System",
+        description:
+            "Aplicación web para la gestión de eventos y creación de entradas.",
+        tags: [
+            "Nestjs",
+            "Docker",
+            "Mysql",
+            "JWT",
+            "TypeORM",
+            "React",
+            "Yup",
+            "Zustand",
+            "React Router",
+            "Typescript",
+            "Axios",
+            "React Hook Form",
+        ],
+        href: "https://github.com/Pedrosandoval2/Event-Creation-System",
+        className: "col-span-2",
+        thumbnail: "/assets/proyecto2.webp",
+    },
+    {
+        id: 4,
+        title: "Portafolio",
+        description:
+            "Portafolio personal de proyectos y habilidades.",
+        tags: [
+            "Astro",
+            "TailwindCSS",
+            "Netlify",
+            "Bun",
+        ],
+        href: "https://github.com/Pedrosandoval2/Event-Registration-System",
+        content: "Portafolio",
+        className: "sm:col-span-3 col-span-2",
+        thumbnail: "/assets/proyecto5.webp",
+    },
+    {
+        id: 4,
+        title: "User Registration & QR Code",
+        description:
+            "Aplicación web para registrar asistentes a eventos, generar códigos QR individuales y escanearlos para validar la asistencia en tiempo real.",
+        tags: [
+            "NestJS",
+            "TypeScript",
+            "TypeORM",
+            "MySQL",
+            "Docker Compose",
+            "QR Code",
+            "Class Validator",
+            "Next.js",
+            "TailwindCSS",
+            "html5-qrcode",
+            "Axios",
+        ],
+        href: "https://github.com/Pedrosandoval2/Event-Registration-System",
+        content: "User Registration & QR Code",
+        className: "sm:col-span-2",
+        thumbnail: "/assets/proyecto3.webp",
+    },
+    {
+        id: 3,
+        title: "Working....",
+        content: "Working",
+        description: "Aplicación Mobile en desarrollo",
+        tags: [],
+        href: "",
+        className: "sm:col-span-1 col-span-2",
+        thumbnail: "/assets/proyecto4.webp",
+    },
+];
+---
+
+<div class="h-screen py-0 w-full">
+    <LayoutGridCard cards={cards} />
+</div>

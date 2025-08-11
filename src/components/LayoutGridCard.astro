@@ -1,0 +1,230 @@
+---
+import type { Card } from "./LayoutGrid.astro";
+const { cards } = Astro.props;
+---
+
+<div
+    class="layout-grid w-full h-full p-10 grid grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto gap-4 relative"
+>
+    {
+        cards.map((card: Card) => (
+            <div class={`card-container ${card.className}`}>
+                <div
+                    class="card bg-white rounded-xl h-full w-full relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.01]"
+                    data-card-id={card.id}
+                    data-thumbnail={card.thumbnail}
+                    data-title={card.title}
+                    data-url={card.href}
+                    data-tag={card.tags.join(", ")}
+                    data-description={card.description}
+                >
+                    <img
+                        src={card.thumbnail || "/placeholder.svg"}
+                        alt="thumbnail"
+                        class="object-cover object-top absolute inset-0 h-full w-full transition duration-200"
+                        loading="lazy"
+                    />
+                    <div class="flex-wrap gap-1 mb-4 hidden">
+                        {card.tags.map((tag) => (
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-md">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                    <a href={`${card.href}`} class="modal-button-url" />
+                </div>
+            </div>
+        ))
+    }
+
+    <!-- Modal Overlay -->
+    <div
+        class="modal-overlay fixed inset-0 bg-black bg-opacity-0 z-40 pointer-events-none transition-all duration-300 opacity-0"
+    >
+        <div
+            class="modal-content fixed inset-0 z-50 flex justify-center items-center p-4"
+        >
+            <div
+                class="modal-card bg-transparent h-1/2 w-full sm:w-1/2 rounded-lg shadow-2xl relative overflow-hidden transform scale-95 transition-all duration-300"
+            >
+                <img
+                    class="modal-image object-cover object-top absolute inset-0 h-full w-full"
+                    alt="Selected image"
+                />
+                <div class="absolute inset-0 h-full w-full bg-black opacity-60">
+                </div>
+                <div
+                    class="modal-text relative px-8 pb-4 z-10 h-full flex flex-col justify-center items-center text-white transform translate-y-4 opacity-0 transition-all duration-300 delay-100"
+                >
+                    <h3 class="modal-title font-bold md:text-4xl text-xl mb-2">
+                    </h3>
+                    <p
+                        class="modal-description font-normal text-base max-w-lg text-neutral-200"
+                    >
+                    </p>
+                    <div class="mt-3">
+                        <ul
+                            class="modal-tags flex flex-wrap max-w-[550px] gap-1.5 justify-center"
+                        >
+                        </ul>
+                    </div>
+
+                    <a
+                        class="modal-button bg-white rounded text-black p-2 mt-3 cursor-pointer hidden"
+                    >
+                        Ver proyecto
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .layout-grid {
+        --transition-duration: 300ms;
+    }
+
+    .card:hover {
+        transform: scale(1.02);
+    }
+
+    .modal-overlay.active {
+        pointer-events: auto;
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-overlay.active .modal-card {
+        transform: scale(1);
+    }
+
+    .modal-overlay.active .modal-text {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        .modal-content .modal-card {
+            width: 90%;
+            height: 60%;
+        }
+    }
+</style>
+
+<script>
+    class LayoutGridManager {
+        overlay: any;
+        modalImage: any;
+        modalTitle: any;
+        modalDescription: any;
+        modalButton: any;
+        modalButtonUrl: any;
+        modalTags: any;
+        cards: NodeListOf<Element>;
+
+        constructor() {
+            this.overlay = document.querySelector(".modal-overlay");
+            this.modalImage = document.querySelector(".modal-image");
+            this.modalTitle = document.querySelector(".modal-title");
+            this.modalButton = document.querySelector(".modal-button");
+            this.modalButtonUrl = document.querySelector(".modal-button-url");
+            this.modalTags = document.querySelector(".modal-tags");
+
+            this.modalDescription =
+                document.querySelector(".modal-description");
+            this.cards = document.querySelectorAll(".card");
+
+            this.init();
+        }
+
+        init() {
+            // Add click listeners to cards
+            this.cards.forEach((card) => {
+                card.addEventListener("click", (e) => this.handleCardClick(e));
+            });
+
+            // Add click listener to overlay for closing
+            this.overlay.addEventListener("click", (e: MouseEvent) => {
+                if (
+                    e.target === this.overlay ||
+                    e.target.closest(".modal-content") === e.target
+                ) {
+                    this.closeModal();
+                }
+            });
+
+            // Add escape key listener
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    this.closeModal();
+                }
+            });
+
+            // this.modalButton.addEventListener("click", () => {
+            //     this.clickButton();
+            // });
+        }
+
+        handleCardClick(e: MouseEvent) {
+            const card = e.currentTarget as HTMLElement;
+            const cardId = card.dataset.cardId;
+            const cardTag = card.dataset.tag ?? "";
+            const thumbnail = card.dataset.thumbnail ?? "/placeholder.svg";
+            const title = card.dataset.title ?? "";
+            const description = card.dataset.description ?? "";
+            const url = card.dataset.url ?? "";
+
+            this.openModal(thumbnail, title, description, cardTag, url);
+        }
+
+        openModal(
+            thumbnail: string,
+            title: string,
+            description: string,
+            cardTag: string,
+            url: string
+        ) {
+            this.modalImage.src = thumbnail;
+            this.modalTitle.textContent = title;
+            this.modalDescription.textContent = description;
+
+            this.overlay.classList.add("active");
+            document.body.style.overflow = "hidden";
+
+            this.modalTags.innerHTML = "";
+
+            if(url.length > 0) {
+                this.modalButton.classList.remove("hidden");
+                this.modalButton.href = url;
+                this.modalButton.target = "_blank";
+            }
+
+            if (cardTag.length > 0) {
+                const tags = cardTag.split(",");
+                tags.forEach((tag) => {
+                    const tagElement = document.createElement("li");
+                    tagElement.className =
+                        "bg-gray-100 text-gray-700 text-xs px-1 py-auto rounded-md py-2";
+                    tagElement.textContent = tag;
+                    this.modalTags.appendChild(tagElement);
+                });
+            }
+        }
+
+        closeModal() {
+            this.overlay.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        new LayoutGridManager();
+    });
+
+    // Re-initialize on navigation (for Astro's client-side routing)
+    document.addEventListener("astro:page-load", () => {
+        new LayoutGridManager();
+    });
+</script>
