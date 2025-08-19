@@ -1,0 +1,653 @@
+---
+import type { languageList } from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import { useTranslations } from "../../i18n/ui";
+import "../../styles/global.css";
+import LayoutGrid from "../../components/LayoutGrid.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+export async function getStaticPaths() {
+	return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const currentPath = Astro.url;
+
+const getThePathRoute = currentPath.pathname.split("/")[2];
+
+const currentLang = Astro.params.lang || "es";
+const t = useTranslations(currentLang as keyof typeof languageList);
+
+const languages = [
+	{ code: "en", name: t("english"), region: t("united-states") }, // Inglés
+	{ code: "es", name: t("spanish"), region: t("spain") }, // Español
+];
+---
+
+<Layout>
+	<body
+		class="bg-gradient-to-br from-custom-black via-custom-black to-custom-blue text-white"
+	>
+		<!-- Navigation -->
+		<nav class="flex items-center justify-between px-6 py-4 lg:px-12">
+			<div class="text-white font-bold text-2xl">{"<P />"}</div>
+			<div class="hidden md:flex items-center space-x-8 text-gray-300">
+				<a href="#home" class="hover:text-white transition-colors"
+					>{t("nav-home")}</a
+				>
+				<a href="#about" class="hover:text-white transition-colors"
+					>{t("nav-about")}</a
+				>
+				<a href="#projects" class="hover:text-white transition-colors"
+					>{t("nav-projects")}</a
+				>
+				<a href="#contact" class="hover:text-white transition-colors"
+					>{t("nav-contact")}</a
+				>
+			</div>
+			<div
+				class="flex items-center space-x-2 text-gray-300 relative cursor-pointer"
+				id="language-trigger"
+				aria-expanded="false"
+				aria-controls="language-dropdown"
+			>
+				<span id="selected-language-code">{t("nav-language")}</span>
+				<svg
+					class="w-4 h-4"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M19 9l-7 7-7-7"></path>
+				</svg>
+				<div id="language-dropdown" class="dropdown-content" hidden>
+					<ul>
+						{
+							languages.map((language) => (
+								<li>
+									<a
+										data-language-code={language.code}
+										class="flex p-2 justify-start items-center gap-2 hover:bg-[#171718]"
+										href={getRelativeLocaleUrl(
+											language.code,
+											`/${getThePathRoute}/`,
+										)}
+									>
+										<div>
+											<span class="language-name">
+												{language.name}
+											</span>
+											<span class="language-region">
+												{language.region}
+											</span>
+										</div>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="16"
+											height="16"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="check-icon"
+											style={`opacity: ${language.code === currentLang ? "1" : "0"}`}
+										>
+											<polyline points="20 6 9 17 4 12" />
+										</svg>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<section
+			id="home"
+			class="px-6 lg:px-12 py-12 lg:py-20 lg:mt-7 bg-gradient-to-b from-custom-black to-custom-blue/20"
+		>
+			<div
+				class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center justify-center"
+			>
+				<!-- Texto a la izquierda -->
+				<div class="space-y-8">
+					<div class="space-y-4">
+						<p class="text-gray-300 text-lg">
+							{t("hero-greeting")}
+						</p>
+						<h1
+							class="text-4xl lg:text-7xl font-bold text-white leading-tight"
+						>
+							{t("hero-title")}
+						</h1>
+						<p class="text-gray-400 text-ls max-w-md">
+							{t("hero-description")}
+						</p>
+					</div>
+					<!-- Botón CV -->
+					<div class="flex flex-row items-center gap-6">
+						<a
+							class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-all duration-300 hover:scale-105"
+							href="/assets/Pedro_Sandoval_CV.pdf"
+							download="Pedro_Sandoval_CV"
+						>
+							{t("hero-download-cv")}
+							<svg
+								class="w-4 h-4"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+								></path>
+							</svg>
+						</a>
+					</div>
+				</div>
+
+				<!-- Imagen a la derecha (sección añadida) -->
+				<div class="md:flex justify-center lg:justify-end hidden">
+					<div class="relative">
+						<div
+							class="w-80 h-96 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center border border-blue-500/30"
+						>
+							<img
+								class="aspect-[4/5] object-cover rounded-3xl"
+								src="/assets/perfil.webp"
+								alt="perfil"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Statistics Section -->
+		<section class="px-6 lg:px-12 py-18 hidden sm:block">
+			<div class="max-w-7xl mx-auto">
+				<div class="lg:grid flex justify-center lg:grid-cols-3 gap-8">
+					<div class="text-center">
+						<div
+							class="text-4xl lg:text-6xl font-bold text-white mb-2"
+						>
+							2
+						</div>
+						<div class="text-gray-400 text-sm">
+							{t("stats-experience")}
+						</div>
+					</div>
+					<div class="text-center">
+						<div
+							class="text-4xl lg:text-6xl font-bold text-white mb-2"
+						>
+							+10
+						</div>
+						<div class="text-gray-400 text-sm">
+							{t("stats-technologies")}
+						</div>
+					</div>
+					<div class="text-center">
+						<div
+							class="text-4xl lg:text-6xl font-bold text-white mb-2"
+						>
+							4
+						</div>
+						<div class="text-gray-400 text-sm">
+							{t("stats-projects")}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="max-w-13 w-full m-auto mt-9  sm:block">
+			<svg
+				viewBox="0 0 24 24"
+				class="animate-bounce animate-infinite"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				stroke="#ffffff"
+				><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+					id="SVGRepo_tracerCarrier"
+					stroke-linecap="round"
+					stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+					<path
+						d="M12 9V7M12 21C8.68629 21 6 18.3137 6 15V9C6 5.68629 8.68629 3 12 3C15.3137 3 18 5.68629 18 9V15C18 18.3137 15.3137 21 12 21Z"
+						stroke="#ffffff"
+						stroke-width="1.2"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+				</g></svg
+			>
+		</div>
+
+		<!-- Recent Projects Section -->
+		<section id="projects" class="px-6 lg:px-12 py-16">
+			<div class="max-w-7xl mx-auto">
+				<h2
+					class="text-2xl lg:text-3xl font-bold text-white text-center mb-12 tracking-[0.3em]"
+				>
+					{t("projects-title")}
+				</h2>
+				<LayoutGrid />
+			</div>
+		</section>
+
+		<!-- Experience Section -->
+		<section id="about" class="px-6 lg:px-12 py-16">
+			<div class="max-w-7xl mx-auto">
+				<h2 class="text-4xl lg:text-6xl font-bold text-white mb-8">
+					{t("experience-title")}
+				</h2>
+				<p
+					class="text-gray-400 text-lg max-w-4xl mb-16 leading-relaxed"
+				>
+					{t("experience-description")}
+				</p>
+
+				<!-- Timeline -->
+				<div class="relative">
+					<div
+						class="absolute left-4 top-0 bottom-0 w-px bg-gray-700"
+					>
+					</div>
+
+					<div class="space-y-12">
+						<!-- Experience 1 -->
+						<div class="relative flex items-start">
+							<div
+								class="absolute left-0 w-8 h-8 bg-gray-800 border-4 border-blue-500 rounded-full flex items-center justify-center"
+							>
+								<div class="w-2 h-2 bg-blue-500 rounded-full">
+								</div>
+							</div>
+
+							<div class="ml-16 space-y-4">
+								<div
+									class="inline-block bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full text-sm font-medium border border-blue-700/50"
+								>
+									{t("experience-freelance-date")}
+								</div>
+								<div class="space-y-3">
+									<h3
+										class="text-2xl lg:text-3xl font-bold text-white"
+									>
+										{t("experience-freelance-title")}
+									</h3>
+									<p class="text-gray-400 text-sm">
+										{t("experience-freelance-company")}
+									</p>
+									<p
+										class="text-gray-300 leading-relaxed max-w-4xl"
+									>
+										{t("experience-freelance-description")}
+									</p>
+									<p class="text-white">
+										{t("experience-freelance-skills")}
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Experience 2 -->
+						<div class="relative flex items-start">
+							<div
+								class="absolute left-0 w-8 h-8 bg-gray-800 border-4 border-blue-500 rounded-full flex items-center justify-center"
+							>
+								<div class="w-2 h-2 bg-blue-500 rounded-full">
+								</div>
+							</div>
+
+							<div class="ml-16 space-y-4">
+								<div
+									class="inline-block bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full text-sm font-medium border border-blue-700/50"
+								>
+									{t("experience-frontend-date")}
+								</div>
+								<div class="space-y-3">
+									<h3
+										class="text-2xl lg:text-3xl font-bold text-white"
+									>
+										{t("experience-frontend-title")}
+									</h3>
+									<p class="text-gray-400 text-sm">
+										{t("experience-frontend-company")}
+									</p>
+									<p
+										class="text-gray-300 leading-relaxed max-w-4xl"
+									>
+										{t("experience-frontend-description")}
+									</p>
+									<p class="text-white">
+										{t("experience-frontend-skills")}
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="relative flex items-start mt-12">
+							<!-- Punto de timeline -->
+							<div
+								class="absolute left-0 w-8 h-8 bg-gray-800 border-4 border-blue-500 rounded-full flex items-center justify-center"
+							>
+								<div class="w-2 h-2 bg-blue-500 rounded-full">
+								</div>
+							</div>
+
+							<!-- Contenido -->
+							<div class="ml-16 space-y-4">
+								<div
+									class="inline-block bg-blue-900/50 text-blue-300 px-4 py-2 rounded-full text-[13px] md:text-sm font-medium border border-blue-700/50"
+								>
+									{t("experience-fullstack-date")}
+								</div>
+
+								<div class="space-y-3">
+									<h3
+										class="text-2xl lg:text-3xl font-bold text-white"
+									>
+										{t("experience-fullstack-title")}
+									</h3>
+
+									<p class="text-gray-400 text-sm">
+										{t("experience-fullstack-company")}
+									</p>
+
+									<p
+										class="text-gray-300 leading-relaxed max-w-4xl"
+									>
+										{t("experience-fullstack-description")}
+									</p>
+
+									<p class="text-white">
+										{t("experience-fullstack-skills")}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section id="contact" class="px-6 lg:px-12 py-16">
+			<div class="max-w-7xl mx-auto">
+				<h1 class="text-4xl lg:text-6xl font-bold text-white mb-12">
+					{t("contact-title")}
+				</h1>
+
+				<!-- Contact Form -->
+				<div
+					class="max-w-4xl mx-auto bg-gradient-to-br from-blue-900/10 to-black rounded-3xl p-8 lg:p-12 border border-blue-900/20"
+				>
+					<form
+						action="https://formsubmit.co/pedrosandovalespinoza1@gmail.com"
+						method="POST"
+						class="space-y-8"
+					>
+						<div class="grid md:grid-cols-2 gap-8">
+							<div class="space-y-2">
+								<label
+									for="fullName"
+									class="text-white block mb-1"
+								>
+									{t("contact-form-name")}
+								</label>
+								<input
+									type="text"
+									id="fullName"
+									name="full_name"
+									placeholder={t(
+										"contact-form-placeholder-name",
+									)}
+									class="w-full bg-blue-950/50 border border-blue-800/50 focus:border-blue-500 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+								/>
+							</div>
+
+							<div class="space-y-2">
+								<label
+									for="email"
+									class="text-white block mb-1"
+								>
+									{t("contact-form-email")}
+								</label>
+								<input
+									type="email"
+									id="email"
+									name="email"
+									placeholder={t(
+										"contact-form-placeholder-email",
+									)}
+									class="w-full bg-blue-950/50 border border-blue-800/50 focus:border-blue-500 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+								/>
+							</div>
+						</div>
+
+						<div class="space-y-2">
+							<label for="message" class="text-white block mb-1">
+								{t("contact-form-message")}
+							</label>
+							<textarea
+								id="message"
+								rows="6"
+								name="message"
+								placeholder={t(
+									"contact-form-placeholder-message",
+								)}
+								class="w-full bg-blue-950/50 border border-blue-800/50 focus:border-blue-500 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+							></textarea>
+						</div>
+
+						<div>
+							<button
+								type="submit"
+								class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg flex items-center gap-2 transition-all duration-300 hover:scale-105"
+							>
+								{t("contact-form-submit")}
+								<svg
+									class="w-5 h-5"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+									></path>
+								</svg>
+							</button>
+						</div>
+					</form>
+				</div>
+
+				<!-- Additional Contact Info -->
+				<div class="mt-24 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div
+						class="bg-gradient-to-br from-gray-900 to-blue-900/20 p-6 rounded-xl border border-blue-900/30"
+					>
+						<div
+							class="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center mb-4"
+						>
+							<div class="w-6 h-6 bg-blue-500 rounded-full"></div>
+						</div>
+						<h3 class="text-xl font-semibold text-white mb-2">
+							{t("contact-info-location")}
+						</h3>
+						<p class="text-gray-400">
+							{t("contact-info-location-value")}
+						</p>
+					</div>
+
+					<div
+						class="bg-gradient-to-br from-gray-900 to-blue-900/20 p-6 rounded-xl border border-blue-900/30"
+					>
+						<div
+							class="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center mb-4"
+						>
+							<div class="w-6 h-6 bg-blue-500 rounded-full"></div>
+						</div>
+						<h3 class="text-xl font-semibold text-white mb-2">
+							{t("contact-info-modality")}
+						</h3>
+						<span class="text-gray-400"
+							>{t("contact-info-modality-remote")} |</span
+						>
+						<span class="text-gray-400"
+							>{t("contact-info-modality-hybrid")} |</span
+						>
+						<span class="text-gray-400"
+							>{t("contact-info-modality-onsite")}</span
+						>
+					</div>
+
+					<div
+						class="bg-gradient-to-br from-gray-900 to-blue-900/20 p-6 rounded-xl border border-blue-900/30"
+					>
+						<div
+							class="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center mb-4"
+						>
+							<div class="w-6 h-6 bg-blue-500 rounded-full"></div>
+						</div>
+						<h3 class="text-xl font-semibold text-white mb-2">
+							{t("contact-info-social")}
+						</h3>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Floating WhatsApp Button -->
+		<div class="fixed bottom-6 right-6 z-50">
+			<a
+				href="https://wa.link/7vw48r"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group"
+			>
+				<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+					<path
+						d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.690"
+					></path>
+				</svg>
+				<span
+					class="absolute right-full mr-3 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+				>
+					{t("whatsapp-tooltip")}
+				</span>
+			</a>
+		</div>
+	</body>
+</Layout>
+
+<script>
+	document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+		anchor.addEventListener("click", function (e) {
+			e.preventDefault();
+			const target = document.querySelector(this.getAttribute("href"));
+			if (target) {
+				target.scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+			}
+		});
+	});
+</script>
+
+<script>
+	// Client-side JavaScript
+	document.addEventListener("DOMContentLoaded", () => {
+		const trigger = document.getElementById("language-trigger");
+		const dropdown = document.getElementById("language-dropdown");
+		const languageCode = document.getElementById("selected-language-code");
+		const listItems = document.querySelectorAll(".language-selector li");
+
+		// Set initial selected language
+		let selectedLanguage = "en";
+
+		// Toggle dropdown
+		trigger?.addEventListener("click", () => {
+			const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+			trigger.setAttribute("aria-expanded", (!isExpanded).toString());
+			dropdown?.toggleAttribute("hidden");
+
+			// Close dropdown when clicking outside
+			if (!isExpanded) {
+				document.addEventListener("click", closeDropdownOutside);
+			} else {
+				document.removeEventListener("click", closeDropdownOutside);
+			}
+		});
+
+		// Close dropdown when clicking outside
+		function closeDropdownOutside(event: MouseEvent) {
+			const target = event.target as Node;
+			if (
+				trigger &&
+				!trigger.contains(target) &&
+				dropdown &&
+				!dropdown.contains(target)
+			) {
+				trigger.setAttribute("aria-expanded", "false");
+				dropdown.setAttribute("hidden", "");
+				document.removeEventListener("click", closeDropdownOutside);
+			}
+		}
+
+		// Handle language selection
+		listItems.forEach((item) => {
+			item.addEventListener("click", () => {
+				const langCode = item.getAttribute("data-language-code");
+				if (langCode) {
+					// Update selected language
+					selectedLanguage = langCode;
+					if (languageCode) {
+						languageCode.textContent = langCode.toUpperCase();
+					}
+
+					// Update check icons
+					listItems.forEach((li) => {
+						const checkIcon = li.querySelector(".check-icon");
+						if (checkIcon) {
+							checkIcon.style.opacity =
+								li.getAttribute("data-language-code") ===
+								langCode
+									? "1"
+									: "0";
+						}
+					});
+
+					// Close dropdown
+					if (trigger && dropdown) {
+						trigger.setAttribute("aria-expanded", "false");
+						dropdown.setAttribute("hidden", "");
+					}
+
+					// Here you would implement the actual language change logic
+					console.log(`Language changed to: ${langCode}`);
+
+					// Example: You could dispatch a custom event that other components can listen for
+					document.dispatchEvent(
+						new CustomEvent("languageChanged", {
+							detail: { language: langCode },
+						}),
+					);
+				}
+			});
+		});
+	});
+</script>

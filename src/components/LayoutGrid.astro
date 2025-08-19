@@ -1,4 +1,6 @@
 ---
+import { useTranslations } from "../i18n/ui";
+import { languageList } from "../i18n/utils";
 import LayoutGridCard from "./LayoutGridCard.astro";
 
 export interface Card {
@@ -12,13 +14,15 @@ export interface Card {
     thumbnail: string;
 }
 
-const cards: Card[] = [
+const currentLang = Astro.params.lang || "es";
+const t = useTranslations(currentLang as keyof typeof languageList);
+
+const createCards = (t: typeof useTranslations extends (lang: any) => infer R ? R : never): Card[] => [
     {
         id: 2,
-        title: "High Rise Tech Labs",
-        content: "High Rise Tech Labs",
-        description:
-            "Aplicación web para registrar asistentes a eventos, generar códigos QR individuales y escanearlos para validar la asistencia en tiempo real.",
+        title: t("project-1-title"), // "High Rise Tech Labs"
+        content: t("project-1-title"), // "High Rise Tech Labs"
+        description: t("project-1-description"),
         className: "sm:col-span-1 col-span-2",
         tags: [
             "Nestjs",
@@ -39,10 +43,9 @@ const cards: Card[] = [
     },
     {
         id: 1,
-        title: "Event Creation System",
-        content: "Event Creation System",
-        description:
-            "Aplicación web para la gestión de eventos y creación de entradas.",
+        title: t("project-2-title"), // "Event Creation System"
+        content: t("project-2-title"), // "Event Creation System"
+        description: t("project-2-description"),
         tags: [
             "Nestjs",
             "Docker",
@@ -63,25 +66,19 @@ const cards: Card[] = [
     },
     {
         id: 4,
-        title: "Portafolio",
-        description:
-            "Portafolio personal de proyectos y habilidades.",
-        tags: [
-            "Astro",
-            "TailwindCSS",
-            "Netlify",
-            "Bun",
-        ],
+        title: t("project-3-title"), // "Event Creation System"
+        content: t("project-3-title"), // "Event Creation System"
+        description: t("project-3-description"),
+        tags: ["Astro", "TailwindCSS", "Netlify", "Bun"],
         href: "https://github.com/Pedrosandoval2/Event-Registration-System",
-        content: "Portafolio",
         className: "sm:col-span-3 col-span-2",
         thumbnail: "/assets/proyecto5.webp",
     },
     {
         id: 4,
-        title: "User Registration & QR Code",
-        description:
-            "Aplicación web para registrar asistentes a eventos, generar códigos QR individuales y escanearlos para validar la asistencia en tiempo real.",
+        title: t("project-4-title"),
+        content: t("project-4-title"),
+        description: t("project-4-description"),
         tags: [
             "NestJS",
             "TypeScript",
@@ -96,21 +93,22 @@ const cards: Card[] = [
             "Axios",
         ],
         href: "https://github.com/Pedrosandoval2/Event-Registration-System",
-        content: "User Registration & QR Code",
         className: "sm:col-span-2",
         thumbnail: "/assets/proyecto3.webp",
     },
     {
         id: 3,
-        title: "Working....",
-        content: "Working",
-        description: "Aplicación Mobile en desarrollo",
+        title: t("project-5-title"), // "Working...."
+        content: t("project-5-title"), // "Working"
+        description: t("project-5-description"),
         tags: [],
         href: "",
         className: "sm:col-span-1 col-span-2",
         thumbnail: "/assets/proyecto4.webp",
     },
 ];
+
+const cards = createCards(t);
 ---
 
 <div class="h-screen py-0 w-full">
