@@ -71,7 +71,7 @@ const { cards } = Astro.props;
                     </div>
 
                     <a
-                        class="modal-button bg-white rounded text-black p-2 mt-3 cursor-pointer hidden"
+                        class="modal-button bg-black rounded text-white p-2 mt-3 cursor-pointer hidden border-sky-100 border hover:bg-sky-200 hover:text-black transition"
                     >
                         Ver proyecto
                     </a>
@@ -206,7 +206,7 @@ const { cards } = Astro.props;
                 tags.forEach((tag) => {
                     const tagElement = document.createElement("li");
                     tagElement.className =
-                        "bg-gray-100 text-gray-700 text-xs px-1 py-auto rounded-md py-2";
+                        "bg-[#fff] text-gray-700 text-sm px-1 rounded-md py-3";
                     tagElement.textContent = tag;
                     this.modalTags.appendChild(tagElement);
                 });
