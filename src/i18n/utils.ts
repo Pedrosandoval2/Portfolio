@@ -72,7 +72,7 @@ export const labels = {
 
         // Proyectos
         "project-1-title": "High Rise Tech Labs",
-        "project-1-description": "Aplicación web para registrar asistentes a eventos, generar códigos QR individuales y escanearlos para validar la asistencia en tiempo real.",
+        "project-1-description": "Sistema basado en web para gestionar licencias de software, gestionar los pagos y administrar usuarios.",
 
         "project-2-title": "Event Creation System",
         "project-2-description": "Aplicación web para la gestión de eventos y creación de entradas.",
@@ -159,7 +159,7 @@ export const labels = {
 
         // Projects
         "project-1-title": "High Rise Tech Labs",
-        "project-1-description": "Web application to register event attendees, generate individual QR codes and scan them to validate attendance in real time.",
+        "project-1-description": "Web-based system for managing software licenses, handling payments, and administering users.",
 
         "project-2-title": "Event Creation System",
         "project-2-description": "Web application for event management and ticket creation.",
