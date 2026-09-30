@@ -17,7 +17,7 @@ export const labels = {
         // Sección Hero
         "hero-greeting": "Soy Pedro Sandoval",
         "hero-title": "Fullstack Developer",
-        "hero-description": "Más de un año de experiencia desarrollando e implementando soluciones web, APIs seguras y sistemas escalables.",
+        "hero-description": "Más de dos años de experiencia construyendo aplicaciones web, APIs y microservicios con React, TypeScript y Node.js, y aplicando desarrollo asistido por IA y automatización.",
         "hero-download-cv": "Descargar CV",
 
         // Estadísticas
@@ -31,6 +31,24 @@ export const labels = {
         // Experiencia
         "experience-title": "Experiencia",
         "experience-description": "Cada proyecto en el que he trabajado ha sido una oportunidad para mejorar mis habilidades, aprender nuevas tecnologías y brindar soluciones eficientes y bien estructuradas.",
+
+        "experience-cueva-date": "12/2025 - PRESENTE",
+        "experience-cueva-title": "Fullstack Developer",
+        "experience-cueva-company": "Consorcio Cueva (World Binary – Impulse)",
+        "experience-cueva-description": "Desarrollo full stack en la plataforma Impulse, con foco en backend, microservicios y automatización con IA.",
+        "experience-cueva-highlight-1": "Diseñé la lógica de agregación del Ranking de Mejores Traders y optimicé sus consultas con Redis, reduciendo operaciones innecesarias sobre la base de datos.",
+        "experience-cueva-highlight-2": "Desarrollo lógica backend en microservicios con Node.js y Express: cron jobs, optimización de consultas SQL y resolución de incidencias críticas.",
+        "experience-cueva-highlight-3": "Participé en el desarrollo desde cero de un portal interno de soporte con Spec-Driven Development (SDD): especificaciones previas, integración de microservicios y APIs, y manejo de fallos parciales entre servicios.",
+        "experience-cueva-highlight-4": "Desarrollé un flujo de automatización con Claude, Slack y Jira que genera tickets, asocia reportes a sus hilos de Slack y notifica cambios de estado.",
+        "experience-cueva-highlight-5": "Aplico desarrollo asistido por IA y flujos multi-agente (subagentes coordinados) en análisis de código, arquitectura y optimización de proyectos.",
+        "experience-cueva-highlight-6": "Construyo interfaces con React y TypeScript integrando APIs REST, con pruebas unitarias, code reviews y validación con QA.",
+        "experience-cueva-skills": "Aptitudes: React, TypeScript, Node.js, Express, Redis, SQL, Microservicios, REST APIs, Spec-Driven Development, Multi-agent workflows, Claude, Slack, Jira.",
+
+        "experience-gamt-date": "2025 - OCTUBRE / DICIEMBRE",
+        "experience-gamt-title": "Asistente TI – Frontend Junior",
+        "experience-gamt-company": "GAMT",
+        "experience-gamt-description": "Migré una aplicación legacy de HTML/CSS/JS a una SPA en React, mejorando el rendimiento de carga, y automaticé despliegues continuos en Vercel y Netlify desde GitHub. Capacité al equipo en Git/GitHub y buenas prácticas de despliegue.",
+        "experience-gamt-skills": "Aptitudes: React.js, JavaScript, Git, GitHub, Vercel, Netlify, CI/CD.",
 
         "experience-freelance-date": "2025 - PRESENTE",
         "experience-freelance-title": "Freelance Developer",
@@ -104,7 +122,7 @@ export const labels = {
         // Hero Section
         "hero-greeting": "I'm Pedro Sandoval",
         "hero-title": "Fullstack Developer",
-        "hero-description": "Over a year of experience developing and implementing web solutions, secure APIs, and scalable systems.",
+        "hero-description": "Over two years of experience building web applications, APIs and microservices with React, TypeScript and Node.js, applying AI-assisted development and automation.",
         "hero-download-cv": "Download CV",
 
         // Statistics
@@ -118,6 +136,24 @@ export const labels = {
         // Experience
         "experience-title": "Experience",
         "experience-description": "Every project I've worked on has been an opportunity to improve my skills, learn new technologies, and provide efficient, well-structured solutions.",
+
+        "experience-cueva-date": "12/2025 - PRESENT",
+        "experience-cueva-title": "Fullstack Developer",
+        "experience-cueva-company": "Consorcio Cueva (World Binary – Impulse)",
+        "experience-cueva-description": "Full stack development on the Impulse platform, focused on backend, microservices and AI-driven automation.",
+        "experience-cueva-highlight-1": "Designed the aggregation logic for the Top Traders Ranking and optimized its queries with Redis, reducing unnecessary database operations.",
+        "experience-cueva-highlight-2": "Build backend logic in microservices with Node.js and Express: cron jobs, SQL query optimization and critical incident resolution.",
+        "experience-cueva-highlight-3": "Contributed to building an internal support portal from scratch using Spec-Driven Development (SDD): upfront specs, microservice and API integration, and handling of partial failures between services.",
+        "experience-cueva-highlight-4": "Built an automation flow with Claude, Slack and Jira that creates tickets, links reports to their Slack threads and notifies status changes.",
+        "experience-cueva-highlight-5": "Apply AI-assisted development and multi-agent workflows (coordinated sub-agents) for code analysis, architecture and project optimization.",
+        "experience-cueva-highlight-6": "Build interfaces with React and TypeScript integrating REST APIs, backed by unit tests, code reviews and QA validation.",
+        "experience-cueva-skills": "Skills: React, TypeScript, Node.js, Express, Redis, SQL, Microservices, REST APIs, Spec-Driven Development, Multi-agent workflows, Claude, Slack, Jira.",
+
+        "experience-gamt-date": "2025 - OCTOBER / DECEMBER",
+        "experience-gamt-title": "IT Assistant – Junior Frontend",
+        "experience-gamt-company": "GAMT",
+        "experience-gamt-description": "Migrated a legacy HTML/CSS/JS application to a React SPA, improving load performance, and automated continuous deployments to Vercel and Netlify from GitHub. Trained the team on Git/GitHub and deployment best practices.",
+        "experience-gamt-skills": "Skills: React.js, JavaScript, Git, GitHub, Vercel, Netlify, CI/CD.",
 
         "experience-freelance-date": "2025 - PRESENT",
         "experience-freelance-title": "Freelance Developer",
